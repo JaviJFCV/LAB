@@ -45,15 +45,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app
-
-      - name: Debug Secrets
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}"
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" | sed 's/./& /g'  # No imprime la clave completa
-          echo "AWS_REGION=${{ secrets.AWS_REGION }}"
-          echo "AWS_EB_ENV_NAME=${{ secrets.AWS_EB_ENV_NAME }}"
           
-       - name: Debug Secrets
+      - name: Debug Secrets
         run: |
           echo "Checking environment variables..."
           env | grep AWS
