@@ -52,7 +52,6 @@ jobs:
       - name: Debug Environment Variables (safe)
         run: |
          echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
-         echo "AWS_REGION=${AWS_REGION}"
          echo "AWS_EB_ENV_NAME=${AWS_EB_ENV_NAME}"
 
       - name: Deploy to AWS Elastic Beanstalk
