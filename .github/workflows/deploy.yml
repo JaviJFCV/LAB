@@ -52,6 +52,11 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" | sed 's/./& /g'  # No imprime la clave completa
           echo "AWS_REGION=${{ secrets.AWS_REGION }}"
           echo "AWS_EB_ENV_NAME=${{ secrets.AWS_EB_ENV_NAME }}"
+          
+       - name: Debug Secrets
+        run: |
+          echo "Checking environment variables..."
+          env | grep AWS
 
 
       - name: Deploy to AWS Elastic Beanstalk
