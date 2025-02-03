@@ -39,9 +39,10 @@ jobs:
   deploy:
     needs: build  # Espera a que el job 'build' termine antes de iniciar
     runs-on: ubuntu-latest
-
-      - name: Set up AWS credentials
-        run: |
+    
+    steps:
+     - name: Set up AWS credentials
+       run: |
          mkdir -p ~/.aws  # Crea la carpeta ~/.aws en /home/runner/
          echo "[default]" > ~/.aws/credentials
          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
@@ -50,14 +51,14 @@ jobs:
          echo "region=sa-east-1" >> ~/.aws/config
 
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
+     - name: Download artifact
+       uses: actions/download-artifact@v4
+       with:
           name: app
 
-      - name: Deploy to AWS Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
+     - name: Deploy to AWS Elastic Beanstalk
+       uses: einaregilsson/beanstalk-deploy@v21
+       with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: "my-devops-app"
