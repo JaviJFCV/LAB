@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18  # Version Node.js 18
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
@@ -35,31 +35,30 @@ jobs:
         with:
           name: app
           path: app.zip
-          
-      - name: Mostrar Variables de Entorno
-        run: env | sort
 
   deploy:
     needs: build  # Espera a que el job 'build' termine antes de iniciar
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: app
-          
-      - name: Debug Environment Variables (safe)
-        run: |
-         echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
-         echo "AWS_EB_ENV_NAME=${AWS_EB_ENV_NAME}"
 
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: "my-devops-app"  # App AWS Elastic Beanstalk
+          application_name: "my-devops-app"
           environment_name: "My-devops-app-lab"
           region: sa-east-1
           version_label: "deploy-${{ github.run_number }}"
