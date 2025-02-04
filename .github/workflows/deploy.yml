@@ -33,6 +33,6 @@ jobs:
     - name: Set up Azure WebApp Deploy
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'lab-devops'  # Nombre de App Service
+        app-name: 'lab-Devops-webapp'  # Nombre de App Service
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Perfil de publicación almacenado como secreto
         package: .  # Publica todo el código de tu repositorio
