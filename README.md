@@ -2,8 +2,7 @@ Test de Ingeniero DevOps - Bice Vida
 
 Prueba de código 
 
-	Objetivo: Implementar un pipeline para despliegue de una aplicación en una Cloud pública (AWS, Google o
-Azure)
+	Objetivo: Implementar un pipeline para despliegue de una aplicación en una Cloud pública (AWS, Google o Azure)
 
 
 - Se creó app en node.js/Express que consume el endpoint https://dn8mlk7hdujby.cloudfront.net/interview/insurance/58 y expone una API REST.
